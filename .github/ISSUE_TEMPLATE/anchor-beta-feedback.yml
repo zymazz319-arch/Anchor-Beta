@@ -1,1 +1,124 @@
+name: Anchor Beta Feedback
+description: Structured feedback for the Anchor recovery companion beta
+title: "[Feedback] "
+labels: ["beta-feedback"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for testing **Anchor**! 
+        Your feedback is extremely valuable. Please be as honest and specific as possible.
 
+  - type: dropdown
+    id: device
+    attributes:
+      label: Device / Platform
+      description: What are you primarily testing on?
+      options:
+        - Windows Desktop
+        - Mac Desktop
+        - iPhone
+        - Android Phone
+        - iPad / Tablet
+        - Linux
+        - Other
+    validations:
+      required: true
+
+  - type: dropdown
+    id: browser
+    attributes:
+      label: Browser
+      options:
+        - Chrome
+        - Edge
+        - Firefox
+        - Safari
+        - Other
+    validations:
+      required: true
+
+  - type: dropdown
+    id: duration
+    attributes:
+      label: How long have you been testing?
+      options:
+        - Just started (today)
+        - A few days
+        - About a week
+        - 2+ weeks
+
+  - type: dropdown
+    id: rating
+    attributes:
+      label: Overall Rating
+      description: How valuable or useful has Anchor been so far?
+      options:
+        - 5 — Excellent / Very valuable
+        - 4 — Good
+        - 3 — Okay / Neutral
+        - 2 — Needs work
+        - 1 — Not useful yet
+    validations:
+      required: true
+
+  - type: textarea
+    id: working-well
+    attributes:
+      label: What's working really well?
+      description: Be specific — what features or parts of the experience feel good?
+    validations:
+      required: false
+
+  - type: textarea
+    id: improvements
+    attributes:
+      label: What needs to be improved?
+      description: What frustrates you, feels confusing, or is missing?
+    validations:
+      required: true
+
+  - type: textarea
+    id: aesthetics
+    attributes:
+      label: Aesthetic & Design Feedback
+      description: Thoughts on the visual design, colors, layout, typography, mobile experience, or overall "feel"?
+    validations:
+      required: false
+
+  - type: textarea
+    id: future-ideas
+    attributes:
+      label: Future Vision & "What If" Ideas
+      description: What features would you love to see? Any wild "What if..." or speculative ideas?
+    validations:
+      required: false
+
+  - type: textarea
+    id: bugs
+    attributes:
+      label: Bugs or Confusing Parts
+      description: Any bugs, errors, or moments where you got stuck or confused?
+
+  - type: dropdown
+    id: would-use
+    attributes:
+      label: Would you use Anchor regularly if it continued to be developed?
+      options:
+        - Yes, daily or almost daily
+        - Yes, a few times a week
+        - Occasionally
+        - Probably not
+        - Unsure
+
+  - type: textarea
+    id: other
+    attributes:
+      label: Any other comments?
+      description: Praise, criticism, or anything else you want to share.
+
+  - type: markdown
+    attributes:
+      value: |
+        ---
+        **Thank you.** Your feedback will directly influence the next version of Anchor.
