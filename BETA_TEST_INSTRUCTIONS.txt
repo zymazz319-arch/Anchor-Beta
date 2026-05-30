@@ -1,0 +1,101 @@
+Anchor — Beta Testing Instructions
+====================================
+
+Thank you for helping test Anchor!
+
+Anchor is a completely private, local-only recovery companion app. Everything you enter stays on your device and is never sent anywhere.
+
+
+HOW TO OPEN THE APP
+-------------------
+1. Save the file "Anchor-Beta.html" (or whatever it is named) to your computer.
+2. Double-click the file to open it in your web browser.
+   - It works best in Chrome, Edge, or Firefox (desktop or mobile).
+3. You can also open it on a phone by transferring the file and tapping it.
+
+No installation is required.
+
+Recommended distribution name: Anchor-Beta-v0.9.html (feel free to change the version number).
+
+
+WHAT TO EXPECT ON FIRST USE
+---------------------------
+- The app will open completely empty (no sample data).
+- You will see a welcome message on the home screen.
+- Use the "Load 48 Days of Sample Data" button (in Settings or on the home screen) if you want realistic example data to explore the features.
+- All your real entries are private and stored only in your browser.
+
+
+HOW TO USE ANCHOR
+-----------------
+- Check In: Record your daily mood, HALT levels (Hunger, Anger, Loneliness, Tiredness), urge level, triggers, and notes.
+- Triggers: See which situations come up most often for you.
+- Insights: View charts and pattern detection after you have several check-ins.
+- Journal: Guided reflection prompts.
+- Settings (gear icon): Change theme, export/import your data, load different types of sample data, or reset everything.
+
+Tip: You can install it on your phone or computer like a normal app using the "Install Anchor" button in Settings (works best when served over http, see below).
+
+
+GIVING FEEDBACK
+---------------
+We have created a dedicated feedback form for this beta.
+
+### Primary Feedback Form (Recommended)
+Please use this form to submit your feedback:
+→ https://zymazz319-arch.github.io/Anchor/anchor-feedback-form.html
+
+(Replace the URL above with your actual hosted link once you deploy it via GitHub Pages)
+
+The form asks specifically about:
+- Improvements
+- Aesthetic / visual design feedback
+- Future feature ideas and "What if..." wishes
+- Bugs and confusing parts
+
+It also has a "Copy Formatted Feedback" button that generates clean text you can paste into GitHub or email.
+
+### Alternative (GitHub Issue Form)
+Once set up, you can also open a new issue in the repo using the "Anchor Beta Feedback" template. This creates a nicely structured GitHub issue automatically.
+
+---
+
+Helpful things to include in any feedback:
+- Device + browser (Windows + Chrome, iPhone Safari, etc.)
+- What worked well
+- What felt confusing or broken
+- Specific suggestions
+- Screenshots are very welcome
+
+You can also use the in-app "Give Feedback" section inside Settings.
+
+
+IMPORTANT NOTES FOR TESTERS
+---------------------------
+- This is a BETA. Features and design may change.
+- Data is saved in your browser's local storage. If you clear your browser data or use a different browser/device, your entries will not transfer.
+- The "Install as App" and full offline features work best when the file is run from a local web server (see "Advanced Testing" below). For normal use, just double-clicking the file is perfectly fine.
+- No data ever leaves your device.
+
+Thank you again for testing. Your feedback is genuinely helpful.
+
+
+ADVANCED: Running from a local server (for best PWA experience)
+---------------------------------------------------------------
+If you want the "Install App" button and offline capabilities to work properly:
+
+On Windows (using Python — usually pre-installed):
+1. Open Command Prompt or PowerShell
+2. Navigate to the folder containing the file:
+   cd path\to\the\folder
+3. Run:
+   python -m http.server 8000
+4. Open your browser and go to: http://localhost:8000
+
+On Mac:
+python3 -m http.server 8000
+
+Then use the Install button in Settings. This gives the closest experience to a real installed app.
+
+
+Thank you for your time and honesty while testing Anchor.
