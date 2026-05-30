@@ -1,1 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anchor Beta Feedback</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;family=Playfair+Display:wght@600&amp;display=swap');
+        
+        body {
+            font-family: 'Inter', system_ui, sans-serif;
+        }
+        
+        .heading-serif {
+            font-family: 'Playfair Display', Georgia, serif;
+        }
 
+        .anchor-gradient {
+            background: linear-gradient(135deg, #0f766e, #134e4b);
+        }
+
+        .form-card {
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .section-label {
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: #134e4b;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        .feedback-input, .feedback-textarea {
+            transition: all 0.2s ease;
+        }
+
+        .feedback-input:focus, .feedback-textarea:focus {
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(15, 118, 110, 0.12);
+            border-color: #0f766e;
+        }
+
+        .beta-badge {
+            font-size: 10px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+
+        .generated-output {
+            font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+            white-space: pre-wrap;
+        }
+    </style>
+</head>
+<body class="bg-slate-100 text-slate-700">
+    <!-- Header -->
+    <div class="bg-white border-b border-slate-200">
+        <div class="max-w-2xl mx-auto px-4 py-5 flex items-center justify-between">
+            <div class="flex items-center gap-x-3">
+                <div class="w-10 h-10 anchor-gradient rounded-2xl flex items-center justify-center shadow-sm">
+                    <i class="fa-solid fa-anchor text-white text-2xl"></i>
+                </div>
+                <div>
+                    <div class="flex items-center gap-x-2">
+                        <h1 class="heading-serif text-3xl font-semibold tracking-tight text-teal-900">Anchor</h1>
+                        <span class="beta-badge px-2 py-0.5 rounded-lg bg-amber-100 text-amber-700">BETA</span>
+                    </div>
+                    <p class="text-xs text-teal-700/70 -mt-0.5">Feedback Form</p>
+                </div>
+            </div>
+            <a href="https://github.com/zymazz319-arch" target="_blank" 
+               class="text-xs text-teal-700 hover:text-teal-800 flex items-center gap-x-1.5">
+                <i class="fa-brands fa-github"></i>
+                <span>zymazz319-arch</span>
+            </a>
+        </div>
+    </div>
+
+    <div class="max-w-2xl mx-auto px-4 py-8">
+        
+        <div class="mb-8 text-center">
+            <h2 class="text-2xl font-semibold text-teal-900">Thank you for testing Anchor</h2>
+            <p class="text-slate-600 mt-2 max-w-md mx-auto">Your honest feedback will directly shape the future of this app. This form takes about 5–8 minutes.</p>
+        </div>
+
+        <form id="feedback-form" onsubmit="return false;">
+            
+            <!-- Basic Info -->
+            <div class="form-card bg-white rounded-3xl p-6 mb-6 border border-slate-100">
+                <h3 class="font-semibold text-teal-900 mb-4 flex items-center gap-2">
+                    <i class="fa-solid fa-user w-4"></i> 
+                    <span>About You</span>
+                </h3>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <label class="section-label">Device / Platform</label>
+                        <select id="device" class="feedback-input w-full border border-slate-200 rounded-2xl px-4 py-3 text-sm">
+                            <option value="">Select...</option>
+                            <option value="Windows Desktop">Windows Desktop</option>
+                            <option value="Mac Desktop">Mac Desktop</option>
+                            <option value="iPhone">iPhone</option>
+                            <option value="Android Phone">Android Phone</option>
+                            <option value="iPad / Tablet">iPad / Tablet</option>
+                            <option value="Linux">Linux</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="section-label">Browser</label>
+                        <select id="browser" class="feedback-input w-full border border-slate-200 rounded-2xl px-4 py-3 text-sm">
+                            <option value="">Select...</option>
+                            <option value="Chrome">Chrome</option>
+                            <option value="Edge">Edge</option>
+                            <option value="Firefox">Firefox</option>
+                            <option value="Safari">Safari</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="mt-4">
+                    <label class="section-label">How long have you been testing?</label>
+                    <select id="testing-duration" class="feedback-input w-full border border-slate-200 rounded-2xl px-4 py-3 text-sm">
+                        <option value="">Select...</option>
+                        <option value="Just started (today)">Just started (today)</option>
+                        <option value="A few days">A few days</option>
+                        <option value="About a week">About a week</option>
+                        <option value="2+ weeks">2+ weeks</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Overall Experience -->
+            <div class="form-card bg-white rounded-3xl p-6 mb-6 border border-slate-100">
+                <h3 class="font-semibold text-teal-900 mb-4 flex items-center gap-2">
+                    <i class="fa-solid fa-star w-4"></i> 
+                    <span>Overall Experience</span>
+                </h3>
+                
+                <div class="mb-5">
+                    <label class="section-label">Overall rating (1 = not useful, 5 = extremely valuable)</label>
+                    <div class="flex gap-2 mt-2">
+                        <div class="flex-1">
+                            <select id="rating" class="feedback-input w-full border border-slate-200 rounded-2xl px-4 py-3 text-sm">
+                                <option value="">Choose rating...</option>
+                                <option value="5">5 — Excellent / Very valuable</option>
+                                <option value="4">4 — Good</option>
+                                <option value="3">3 — Okay / Neutral</option>
+                                <option value="2">2 — Needs work</option>
+                                <option value="1">1 — Not useful yet</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <label class="section-label">What’s working really well right now?</label>
+                    <textarea id="working-well" rows="3" class="feedback-textarea w-full border border-slate-200 rounded-2xl px-4 py-3 text-sm resize-y" 
+                              placeholder="Be specific if possible..."></textarea>
+                </div>
+            </div>
+
+            <!-- Improvements -->
+            <div class="form-card bg-white rounded-3xl p-6 mb-6 border border-slate-100">
+                <h3 class="font-semibold text-teal-900 mb-4 flex items-center gap-2">
+                    <i class="fa-solid fa-tools w-4"></i> 
+                    <span>Improvements</span>
+                </h3>
+                <label class="section-label">What needs to be improved? What frustrates or confuses you?</label>
+                <textarea id="improvements" rows="4" class="feedback-textarea w-full border border-slate-200 rounded-2xl px-4 py-3 text-sm resize-y" 
+                          placeholder="Please be honest — this is the most valuable feedback for me..." required></textarea>
+            </div>
+
+            <!-- Aesthetic / Design -->
+            <div class="form-card bg-white rounded-3xl p-6 mb-6 border border-slate-100">
+                <h3 class="font-semibold text-teal-900 mb-4 flex items-center gap-2">
+                    <i class="fa-solid fa-paint-brush w-4"></i> 
+                    <span>Aesthetic &amp; Design Feedback</span>
+                </h3>
+                <label class="section-label">Thoughts on the visual design, colors, layout, typography, mobile experience, or overall “feel”?</label>
+                <textarea id="aesthetics" rows="4" class="feedback-textarea w-full border border-slate-200 rounded-2xl px-4 py-3 text-sm resize-y" 
+                          placeholder="Do you like the calm teal theme? Is it too busy or too minimal? Any specific design suggestions?"></textarea>
+            </div>
+
+            <!-- Future Wants -->
+            <div class="form-card bg-white rounded-3xl p-6 mb-6 border border-slate-100">
+                <h3 class="font-semibold text-teal-900 mb-4 flex items-center gap-2">
+                    <i class="fa-solid fa-rocket w-4"></i> 
+                    <span>Future Vision &amp; “What If” Ideas</span>
+                </h3>
+                <label class="section-label">What features or ideas would you love to see in the future? Any “What if...” or “Wouldn’t it be cool if...” thoughts?</label>
+                <textarea id="future-ideas" rows="5" class="feedback-textarea w-full border border-slate-200 rounded-2xl px-4 py-3 text-sm resize-y" 
+                          placeholder="This is the creative section — no idea is too wild. Dream a little."></textarea>
+                <p class="text-[10px] text-slate-500 mt-2">Examples: integrations, reminders, community features, data export options, different themes, etc.</p>
+            </div>
+
+            <!-- Bugs / Confusion -->
+            <div class="form-card bg-white rounded-3xl p-6 mb-6 border border-slate-100">
+                <h3 class="font-semibold text-teal-900 mb-4 flex items-center gap-2">
+                    <i class="fa-solid fa-bug w-4"></i> 
+                    <span>Bugs or Confusing Parts</span>
+                </h3>
+                <label class="section-label">Did you encounter any bugs, errors, or parts of the app that were confusing or hard to use?</label>
+                <textarea id="bugs" rows="3" class="feedback-textarea w-full border border-slate-200 rounded-2xl px-4 py-3 text-sm resize-y" 
+                          placeholder="Be as specific as possible (what you did, what happened, what you expected)"></textarea>
+            </div>
+
+            <!-- Final Questions -->
+            <div class="form-card bg-white rounded-3xl p-6 mb-6 border border-slate-100">
+                <h3 class="font-semibold text-teal-900 mb-4">Final Questions</h3>
+                
+                <div class="mb-4">
+                    <label class="section-label">Would you use Anchor regularly if it continued to be developed?</label>
+                    <select id="would-use" class="feedback-input w-full border border-slate-200 rounded-2xl px-4 py-3 text-sm">
+                        <option value="">Select...</option>
+                        <option value="Yes, daily or almost daily">Yes, daily or almost daily</option>
+                        <option value="Yes, a few times a week">Yes, a few times a week</option>
+                        <option value="Occasionally">Occasionally</option>
+                        <option value="Probably not">Probably not</option>
+                        <option value="Unsure">Unsure</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label class="section-label">Any other comments, praise, or criticism?</label>
+                    <textarea id="other-comments" rows="3" class="feedback-textarea w-full border border-slate-200 rounded-2xl px-4 py-3 text-sm resize-y" 
+                              placeholder="Anything else you want to tell me?"></textarea>
+                </div>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="flex flex-col sm:flex-row gap-3">
+                <button type="button" onclick="generateMarkdownFeedback()"
+                        class="flex-1 py-4 bg-teal-700 hover:bg-teal-800 active:bg-teal-900 text-white font-semibold rounded-3xl text-base flex items-center justify-center gap-x-2 transition-all">
+                    <i class="fa-solid fa-copy"></i>
+                    <span>Copy Formatted Feedback</span>
+                </button>
+                
+                <button type="button" onclick="emailFeedback()"
+                        class="flex-1 py-4 border border-teal-200 hover:bg-teal-50 text-teal-700 font-semibold rounded-3xl text-base flex items-center justify-center gap-x-2 transition-all">
+                    <i class="fa-solid fa-envelope"></i>
+                    <span>Email to Developer</span>
+                </button>
+            </div>
+
+            <p class="text-center text-xs text-slate-500 mt-4">
+                The “Copy Formatted Feedback” button creates nicely formatted text you can paste directly into GitHub, email, or Discord.
+            </p>
+
+        </form>
+
+        <!-- Output area -->
+        <div id="output-area" class="hidden mt-8">
+            <div class="bg-slate-900 text-slate-200 rounded-3xl p-5">
+                <div class="flex items-center justify-between mb-3">
+                    <div class="text-sm font-medium text-teal-400">Formatted feedback ready to copy</div>
+                    <button onclick="copyToClipboard()" 
+                            class="text-xs px-3 py-1.5 bg-slate-700 hover:bg-slate-600 rounded-2xl flex items-center gap-1.5">
+                        <i class="fa-solid fa-copy"></i>
+                        <span>Copy</span>
+                    </button>
+                </div>
+                <textarea id="generated-markdown" class="generated-output w-full h-64 bg-slate-950 border border-slate-700 rounded-2xl p-4 text-xs text-slate-300 resize-y" readonly></textarea>
+            </div>
+            <p class="text-center text-xs text-slate-500 mt-3">Paste this into a GitHub issue or send it directly to the developer.</p>
+        </div>
+
+    </div>
+
+    <script>
+        function generateMarkdownFeedback() {
+            const getVal = id => document.getElementById(id).value.trim() || '—';
+
+            const markdown = `## Anchor Beta Feedback
+
+**Device / Platform:** ${getVal('device')}
+**Browser:** ${getVal('browser')}
+**Testing duration:** ${getVal('testing-duration')}
+**Overall Rating:** ${getVal('rating')}
+
+### What's working well
+${getVal('working-well')}
+
+### Improvements needed
+${getVal('improvements')}
+
+### Aesthetic & Design feedback
+${getVal('aesthetics')}
+
+### Future vision & "What if" ideas
+${getVal('future-ideas')}
+
+### Bugs or confusing parts
+${getVal('bugs')}
+
+### Would you use Anchor regularly?
+${getVal('would-use')}
+
+### Other comments
+${getVal('other-comments')}
+
+---
+*Submitted via Anchor Beta Feedback Form*`;
+
+            document.getElementById('generated-markdown').value = markdown;
+            document.getElementById('output-area').classList.remove('hidden');
+            document.getElementById('output-area').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function copyToClipboard() {
+            const textarea = document.getElementById('generated-markdown');
+            textarea.select();
+            document.execCommand('copy');
+            
+            const originalText = event.currentTarget ? event.currentTarget.innerHTML : '';
+            const btns = document.querySelectorAll('#output-area button');
+            if (btns.length) {
+                const btn = btns[0];
+                const old = btn.innerHTML;
+                btn.innerHTML = '<i class="fa-solid fa-check"></i> <span>Copied!</span>';
+                setTimeout(() => {
+                    btn.innerHTML = old;
+                }, 1800);
+            }
+        }
+
+        function emailFeedback() {
+            const getVal = id => document.getElementById(id).value.trim();
+            
+            let body = `Anchor Beta Feedback\n\n`;
+            body += `Device: ${getVal('device') || 'Not specified'}\n`;
+            body += `Browser: ${getVal('browser') || 'Not specified'}\n`;
+            body += `Testing duration: ${getVal('testing-duration') || 'Not specified'}\n`;
+            body += `Rating: ${getVal('rating') || 'Not specified'}\n\n`;
+            
+            body += `What's working well:\n${getVal('working-well') || '—'}\n\n`;
+            body += `Improvements:\n${getVal('improvements') || '—'}\n\n`;
+            body += `Aesthetic & Design feedback:\n${getVal('aesthetics') || '—'}\n\n`;
+            body += `Future ideas / What if...:\n${getVal('future-ideas') || '—'}\n\n`;
+            body += `Bugs / Confusion:\n${getVal('bugs') || '—'}\n\n`;
+            body += `Would use regularly: ${getVal('would-use') || '—'}\n\n`;
+            body += `Other comments:\n${getVal('other-comments') || '—'}\n`;
+
+            const subject = encodeURIComponent("Anchor Beta Feedback");
+            const mailto = `mailto:?subject=${subject}&body=${encodeURIComponent(body)}`;
+            window.location.href = mailto;
+        }
+
+        // Simple tailwind script for consistency
+        function init() {
+            console.log('%c[Anchor Feedback] Form ready', 'color:#64748b');
+        }
+        window.onload = init;
+    </script>
+</body>
+</html>
