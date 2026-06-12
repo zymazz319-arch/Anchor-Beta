@@ -182,6 +182,31 @@
         .dark .recovery-slider {
             accent-color: #14b8a6;
         }
+
+        /* ==================== PIN LOCK ==================== */
+        .pin-key {
+            width: 100%;
+            aspect-ratio: 1;
+            border-radius: 9999px;
+            background: rgba(255,255,255,0.08);
+            color: white;
+            font-size: 1.5rem;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.15s ease;
+        }
+        .pin-key:active {
+            background: rgba(255,255,255,0.22);
+        }
+        .pin-dot {
+            transition: background-color 0.15s ease, border-color 0.15s ease;
+        }
+        .pin-dot.filled {
+            background-color: white;
+            border-color: white;
+        }
     </style>
 </head>
 <body class="bg-slate-100 dark:bg-slate-900 text-slate-700 dark:text-slate-300">
@@ -201,6 +226,13 @@
                 </div>
             </div>
             <div class="flex items-center gap-x-1">
+                <!-- Crisis / Help -->
+                <button onclick="showCrisisSupport()"
+                        class="w-9 h-9 flex items-center justify-center text-red-500 hover:bg-red-50 active:bg-red-100 dark:hover:bg-red-900/30 dark:active:bg-red-900/40 rounded-xl transition-colors"
+                        aria-label="Crisis support">
+                    <i class="fa-solid fa-life-ring text-base"></i>
+                </button>
+
                 <!-- Theme Toggle -->
                 <button id="theme-toggle" onclick="toggleTheme()"
                         class="w-9 h-9 flex items-center justify-center text-teal-700 hover:bg-teal-50 active:bg-teal-100 rounded-xl transition-colors"
@@ -634,7 +666,7 @@
     <div id="toast-container" class="fixed bottom-20 left-1/2 transform -translate-x-1/2 z-[100] max-w-xs"></div>
 
     <!-- ==================== MODAL SYSTEM ==================== -->
-    <div id="modal-backdrop" class="hidden fixed inset-0 bg-black/50 backdrop-blur-sm z-[200] flex items-end sm:items-center justify-center p-4 sm:p-6" onclick="handleModalBackdropClick(event)">
+    <div id="modal-backdrop" class="hidden fixed inset-0 bg-black/50 backdrop-blur-sm z-[350] flex items-end sm:items-center justify-center p-4 sm:p-6" onclick="handleModalBackdropClick(event)">
         <div id="modal-card" class="modal-card w-full max-w-md bg-white dark:bg-slate-800 rounded-3xl shadow-2xl border border-slate-100 dark:border-slate-700 overflow-hidden" onclick="event.stopImmediatePropagation()">
             <!-- Header -->
             <div class="px-5 pt-5 pb-3 flex items-start justify-between gap-4 border-b border-slate-100 dark:border-slate-700">
@@ -649,6 +681,50 @@
             
             <!-- Actions -->
             <div id="modal-actions" class="px-5 py-4 bg-slate-50 dark:bg-slate-800/80 border-t border-slate-100 dark:border-slate-700 flex flex-col-reverse sm:flex-row gap-2 sm:gap-3 justify-end"></div>
+        </div>
+    </div>
+
+    <!-- ==================== PIN LOCK OVERLAY ==================== -->
+    <div id="pin-overlay" class="hidden fixed inset-0 z-[300] anchor-gradient flex flex-col items-center justify-between p-6 text-white">
+        <div class="flex-1 flex flex-col items-center justify-center w-full max-w-sm">
+            <div class="w-16 h-16 bg-white/15 rounded-3xl flex items-center justify-center mb-5">
+                <i class="fa-solid fa-anchor text-3xl"></i>
+            </div>
+            <div id="pin-overlay-title" class="text-xl font-semibold mb-1 text-center">Enter your PIN</div>
+            <div id="pin-overlay-subtitle" class="text-sm text-white/70 mb-8 text-center min-h-[1.25rem]"></div>
+
+            <div id="pin-dots" class="flex gap-4 mb-3">
+                <div class="pin-dot w-3.5 h-3.5 rounded-full border-2 border-white/50"></div>
+                <div class="pin-dot w-3.5 h-3.5 rounded-full border-2 border-white/50"></div>
+                <div class="pin-dot w-3.5 h-3.5 rounded-full border-2 border-white/50"></div>
+                <div class="pin-dot w-3.5 h-3.5 rounded-full border-2 border-white/50"></div>
+            </div>
+
+            <div id="pin-error" class="text-sm text-red-200 mb-4 h-5 text-center"></div>
+
+            <div class="grid grid-cols-3 gap-4 w-full max-w-[260px]">
+                <button class="pin-key" onclick="pinKeyPress('1')">1</button>
+                <button class="pin-key" onclick="pinKeyPress('2')">2</button>
+                <button class="pin-key" onclick="pinKeyPress('3')">3</button>
+                <button class="pin-key" onclick="pinKeyPress('4')">4</button>
+                <button class="pin-key" onclick="pinKeyPress('5')">5</button>
+                <button class="pin-key" onclick="pinKeyPress('6')">6</button>
+                <button class="pin-key" onclick="pinKeyPress('7')">7</button>
+                <button class="pin-key" onclick="pinKeyPress('8')">8</button>
+                <button class="pin-key" onclick="pinKeyPress('9')">9</button>
+                <div></div>
+                <button class="pin-key" onclick="pinKeyPress('0')">0</button>
+                <button class="pin-key" onclick="pinKeyPress('back')"><i class="fa-solid fa-delete-left"></i></button>
+            </div>
+        </div>
+
+        <div class="flex flex-col items-center gap-3 pb-2">
+            <button id="pin-forgot-btn" onclick="forgotPin()" class="text-sm text-white/80 hover:text-white">Forgot PIN?</button>
+            <button onclick="showCrisisSupport()" class="text-sm text-white/80 hover:text-white flex items-center gap-2">
+                <i class="fa-solid fa-life-ring"></i>
+                <span>Need help now?</span>
+            </button>
+            <button id="pin-cancel-btn" onclick="cancelPinEntry()" class="hidden text-sm text-white/60 hover:text-white mt-1">Cancel</button>
         </div>
     </div>
 
@@ -1205,6 +1281,418 @@
             applyTheme(isDark ? 'light' : 'dark');
         }
 
+        // ==================== PIN LOCK ====================
+        const PIN_LENGTH = 4;
+        let pinEntry = {
+            mode: null,        // 'unlock' | 'setup' | 'confirm' | 'verify'
+            digits: '',
+            firstPin: null,
+            onSuccess: null,
+            verifyError: 'Incorrect PIN. Try again.'
+        };
+
+        function isPinLockEnabled() {
+            return localStorage.getItem('anchor_pin_enabled') === 'true';
+        }
+
+        function generateSalt() {
+            const arr = new Uint8Array(16);
+            crypto.getRandomValues(arr);
+            return Array.from(arr).map(b => b.toString(16).padStart(2, '0')).join('');
+        }
+
+        async function hashPin(pin, salt) {
+            const enc = new TextEncoder();
+            const data = enc.encode(salt + ':' + pin);
+            const hashBuffer = await crypto.subtle.digest('SHA-256', data);
+            return Array.from(new Uint8Array(hashBuffer)).map(b => b.toString(16).padStart(2, '0')).join('');
+        }
+
+        async function checkPin(pin) {
+            const salt = localStorage.getItem('anchor_pin_salt');
+            const storedHash = localStorage.getItem('anchor_pin_hash');
+            if (!salt || !storedHash) return false;
+            const hash = await hashPin(pin, salt);
+            return hash === storedHash;
+        }
+
+        async function savePin(pin) {
+            const salt = generateSalt();
+            const hash = await hashPin(pin, salt);
+            localStorage.setItem('anchor_pin_salt', salt);
+            localStorage.setItem('anchor_pin_hash', hash);
+            localStorage.setItem('anchor_pin_enabled', 'true');
+        }
+
+        function clearPin() {
+            localStorage.removeItem('anchor_pin_salt');
+            localStorage.removeItem('anchor_pin_hash');
+            localStorage.setItem('anchor_pin_enabled', 'false');
+            localStorage.removeItem('anchor_biometric_enabled');
+        }
+
+        function renderPinDots() {
+            const dots = document.querySelectorAll('#pin-dots .pin-dot');
+            dots.forEach((dot, i) => {
+                dot.classList.toggle('filled', i < pinEntry.digits.length);
+            });
+        }
+
+        function setPinOverlayText(title, subtitle) {
+            document.getElementById('pin-overlay-title').textContent = title;
+            document.getElementById('pin-overlay-subtitle').textContent = subtitle || '';
+        }
+
+        function showPinError(message) {
+            const el = document.getElementById('pin-error');
+            el.textContent = message;
+            if (message) {
+                setTimeout(() => { if (el.textContent === message) el.textContent = ''; }, 1800);
+            }
+        }
+
+        function showPinOverlay() {
+            const overlay = document.getElementById('pin-overlay');
+            overlay.classList.remove('hidden');
+            overlay.classList.add('flex');
+        }
+
+        function hidePinOverlay() {
+            const overlay = document.getElementById('pin-overlay');
+            overlay.classList.add('hidden');
+            overlay.classList.remove('flex');
+            pinEntry.digits = '';
+            pinEntry.firstPin = null;
+            document.getElementById('pin-error').textContent = '';
+        }
+
+        function pinKeyPress(key) {
+            if (key === 'back') {
+                pinEntry.digits = pinEntry.digits.slice(0, -1);
+                renderPinDots();
+                return;
+            }
+            if (pinEntry.digits.length >= PIN_LENGTH) return;
+            pinEntry.digits += key;
+            renderPinDots();
+
+            if (pinEntry.digits.length === PIN_LENGTH) {
+                setTimeout(() => handlePinComplete(), 120);
+            }
+        }
+
+        async function handlePinComplete() {
+            const entered = pinEntry.digits;
+
+            if (pinEntry.mode === 'unlock' || pinEntry.mode === 'verify') {
+                const ok = await checkPin(entered);
+                if (ok) {
+                    const onSuccess = pinEntry.onSuccess;
+                    hidePinOverlay();
+                    if (onSuccess) onSuccess();
+                } else {
+                    showPinError(pinEntry.verifyError);
+                    pinEntry.digits = '';
+                    renderPinDots();
+                }
+                return;
+            }
+
+            if (pinEntry.mode === 'setup') {
+                pinEntry.firstPin = entered;
+                pinEntry.digits = '';
+                pinEntry.mode = 'confirm';
+                setPinOverlayText('Confirm your PIN', 'Enter it again to confirm');
+                renderPinDots();
+                return;
+            }
+
+            if (pinEntry.mode === 'confirm') {
+                if (entered === pinEntry.firstPin) {
+                    await savePin(entered);
+                    const onSuccess = pinEntry.onSuccess;
+                    hidePinOverlay();
+                    if (onSuccess) onSuccess();
+                } else {
+                    showPinError("PINs didn't match. Try again.");
+                    pinEntry.digits = '';
+                    pinEntry.firstPin = null;
+                    pinEntry.mode = 'setup';
+                    setPinOverlayText('Create a PIN', `Choose a ${PIN_LENGTH}-digit PIN`);
+                    renderPinDots();
+                }
+                return;
+            }
+        }
+
+        // Full-screen lock shown on app start (and on re-lock) — blocks the app until the correct PIN is entered
+        function showLockScreen(onSuccess) {
+            pinEntry = { mode: 'unlock', digits: '', firstPin: null, onSuccess: onSuccess || null, verifyError: 'Incorrect PIN. Try again.' };
+            setPinOverlayText('Welcome back', 'Enter your PIN to continue');
+            renderPinDots();
+            document.getElementById('pin-forgot-btn').classList.remove('hidden');
+            document.getElementById('pin-cancel-btn').classList.add('hidden');
+            showPinOverlay();
+
+            // On native apps with biometrics enabled, try Face ID / Fingerprint before falling back to the keypad
+            if (isBiometricEnabled()) {
+                tryBiometricUnlock().then(ok => {
+                    if (ok && pinEntry.mode === 'unlock') {
+                        const cb = pinEntry.onSuccess;
+                        hidePinOverlay();
+                        if (cb) cb();
+                    }
+                });
+            }
+        }
+
+        // Set up a brand-new PIN (used by Settings: enable / change)
+        function startPinSetup(onSuccess, onCancel) {
+            pinEntry = { mode: 'setup', digits: '', firstPin: null, onSuccess, onCancel: onCancel || null, verifyError: '' };
+            setPinOverlayText('Create a PIN', `Choose a ${PIN_LENGTH}-digit PIN`);
+            renderPinDots();
+            document.getElementById('pin-forgot-btn').classList.add('hidden');
+            document.getElementById('pin-cancel-btn').classList.remove('hidden');
+            showPinOverlay();
+        }
+
+        // Verify the existing PIN (used by Settings: disable / change)
+        function startPinVerify(onSuccess, title = 'Enter your current PIN', onCancel) {
+            pinEntry = { mode: 'verify', digits: '', firstPin: null, onSuccess, onCancel: onCancel || null, verifyError: 'Incorrect PIN. Try again.' };
+            setPinOverlayText(title, '');
+            renderPinDots();
+            document.getElementById('pin-forgot-btn').classList.add('hidden');
+            document.getElementById('pin-cancel-btn').classList.remove('hidden');
+            showPinOverlay();
+        }
+
+        function cancelPinEntry() {
+            const onCancel = pinEntry.onCancel;
+            hidePinOverlay();
+            if (onCancel) onCancel();
+        }
+
+        async function forgotPin() {
+            const ok = await showConfirm(
+                'Reset PIN Lock?',
+                "This will turn off PIN lock so you can get back in. Your check-in data will not be affected.\nYou can set a new PIN afterward in Settings."
+            );
+            if (!ok) return;
+
+            const callback = pinEntry.onSuccess;
+            clearPin();
+            hidePinOverlay();
+            showToast('PIN lock turned off. You can re-enable it in Settings.', 'info');
+            if (callback) callback();
+        }
+
+        // ==================== DAILY REMINDERS ====================
+        function isReminderEnabled() {
+            return localStorage.getItem('anchor_reminder_enabled') === 'true';
+        }
+
+        function getReminderTime() {
+            return localStorage.getItem('anchor_reminder_time') || '20:00';
+        }
+
+        // Environment-aware hook: on web there's nothing to pre-schedule (checkReminderNotification
+        // handles it while the app is open); when running inside Capacitor with local-notifications
+        // available, this schedules a real OS-level daily notification.
+        function scheduleReminder(time) {
+            if (window.Capacitor && window.Capacitor.isNativePlatform && window.Capacitor.isNativePlatform()) {
+                if (typeof scheduleNativeReminder === 'function') {
+                    scheduleNativeReminder(time);
+                }
+            }
+        }
+
+        function checkReminderNotification() {
+            if (!isReminderEnabled()) return;
+
+            const today = getTodayDate();
+            if (checkins.some(c => c.date === today)) return;
+
+            const lastFired = localStorage.getItem('anchor_reminder_last_fired');
+            if (lastFired === today) return;
+
+            const [h, m] = getReminderTime().split(':').map(Number);
+            const reminderMoment = new Date();
+            reminderMoment.setHours(h, m, 0, 0);
+            if (new Date() < reminderMoment) return;
+
+            localStorage.setItem('anchor_reminder_last_fired', today);
+
+            const body = "Time for your daily check-in. Taking a moment for yourself matters.";
+            if ('Notification' in window && Notification.permission === 'granted') {
+                try {
+                    new Notification('Anchor', { body });
+                    return;
+                } catch (e) {
+                    // fall through to toast
+                }
+            }
+            showToast("Don't forget your daily check-in today.", 'info');
+        }
+
+        // ==================== CAPACITOR BRIDGE (native app only; no-op on web) ====================
+        function isNativeApp() {
+            return !!(window.Capacitor && window.Capacitor.isNativePlatform && window.Capacitor.isNativePlatform());
+        }
+
+        // Wires re-lock into the native app lifecycle (mirrors the visibilitychange handler).
+        function initCapacitorAppLifecycle() {
+            const AppPlugin = window.Capacitor && window.Capacitor.Plugins && window.Capacitor.Plugins.App;
+            if (!AppPlugin) return;
+
+            AppPlugin.addListener('appStateChange', ({ isActive }) => {
+                if (!isActive && isPinLockEnabled()) {
+                    const overlay = document.getElementById('pin-overlay');
+                    if (overlay.classList.contains('hidden')) {
+                        showLockScreen(null);
+                    }
+                }
+            });
+        }
+
+        // Real OS-level daily reminder via @capacitor/local-notifications, called from scheduleReminder().
+        async function scheduleNativeReminder(time) {
+            const LocalNotifications = window.Capacitor && window.Capacitor.Plugins && window.Capacitor.Plugins.LocalNotifications;
+            if (!LocalNotifications) return;
+
+            await LocalNotifications.cancel({ notifications: [{ id: 1001 }] });
+            if (!time) return;
+
+            const [h, m] = time.split(':').map(Number);
+            await LocalNotifications.requestPermissions();
+            await LocalNotifications.schedule({
+                notifications: [{
+                    id: 1001,
+                    title: 'Anchor',
+                    body: 'Time for your daily check-in. Taking a moment for yourself matters.',
+                    schedule: { on: { hour: h, minute: m }, repeats: true }
+                }]
+            });
+        }
+
+        // Biometric unlock (Face ID / Fingerprint) via capacitor-native-biometric.
+        // The PIN remains the underlying credential and fallback — biometrics just bypass the keypad.
+        function isBiometricEnabled() {
+            return localStorage.getItem('anchor_biometric_enabled') === 'true';
+        }
+
+        async function isBiometricAvailable() {
+            const NativeBiometric = window.Capacitor && window.Capacitor.Plugins && window.Capacitor.Plugins.NativeBiometric;
+            if (!NativeBiometric) return false;
+            try {
+                const result = await NativeBiometric.isAvailable();
+                return !!(result && result.isAvailable);
+            } catch (e) {
+                return false;
+            }
+        }
+
+        async function tryBiometricUnlock() {
+            const NativeBiometric = window.Capacitor && window.Capacitor.Plugins && window.Capacitor.Plugins.NativeBiometric;
+            if (!NativeBiometric) return false;
+            try {
+                await NativeBiometric.verifyIdentity({ reason: 'Unlock Anchor', title: 'Unlock Anchor' });
+                return true;
+            } catch (e) {
+                return false;
+            }
+        }
+
+        async function toggleBiometricFromSettings() {
+            if (isBiometricEnabled()) {
+                localStorage.setItem('anchor_biometric_enabled', 'false');
+                showToast('Face ID / Fingerprint unlock turned off.');
+            } else {
+                const ok = await tryBiometricUnlock();
+                if (ok) {
+                    localStorage.setItem('anchor_biometric_enabled', 'true');
+                    showToast('Face ID / Fingerprint unlock turned on.');
+                } else {
+                    showToast('Could not verify biometrics. Please try again.', 'error');
+                }
+            }
+            showSettings();
+        }
+
+        // Renders the biometric toggle into Settings once availability is confirmed (async, native only)
+        async function renderBiometricToggle() {
+            const container = document.getElementById('biometric-row-container');
+            if (!container) return;
+            if (!isNativeApp()) return;
+
+            const available = await isBiometricAvailable();
+            if (!available) return;
+
+            container.innerHTML = `
+                <div class="flex items-center justify-between bg-white dark:bg-slate-700 border border-slate-200 dark:border-slate-600 rounded-2xl px-4 py-3 mt-2">
+                    <div>
+                        <div class="font-medium text-slate-700 dark:text-slate-200">Use Face ID / Fingerprint</div>
+                        <div class="text-[11px] text-slate-500 dark:text-slate-400">Unlock with biometrics instead of typing your PIN</div>
+                    </div>
+                    <button onclick="toggleBiometricFromSettings()" class="px-3 py-1 text-xs font-semibold rounded-xl border border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-800 hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors">
+                        ${isBiometricEnabled() ? 'Disable' : 'Enable'}
+                    </button>
+                </div>
+            `;
+        }
+
+        // ==================== CRISIS / HELP ====================
+        async function showCrisisSupport() {
+            const content = `
+                <div class="space-y-4 text-sm">
+                    <p class="text-slate-600 dark:text-slate-300 leading-relaxed">
+                        If you're struggling right now, you don't have to go through it alone. These resources are free, confidential, and available right now.
+                    </p>
+
+                    <a href="tel:988" class="calm-card flex items-center justify-between bg-white dark:bg-slate-700 border border-slate-200 dark:border-slate-600 rounded-2xl px-4 py-3.5 hover:bg-slate-50 dark:hover:bg-slate-600 transition-colors">
+                        <div>
+                            <div class="font-semibold text-teal-900 dark:text-teal-100">988 Suicide &amp; Crisis Lifeline</div>
+                            <div class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">Call or text 988 — available 24/7</div>
+                        </div>
+                        <i class="fa-solid fa-phone text-teal-700 dark:text-teal-300"></i>
+                    </a>
+
+                    <a href="tel:18006624357" class="calm-card flex items-center justify-between bg-white dark:bg-slate-700 border border-slate-200 dark:border-slate-600 rounded-2xl px-4 py-3.5 hover:bg-slate-50 dark:hover:bg-slate-600 transition-colors">
+                        <div>
+                            <div class="font-semibold text-teal-900 dark:text-teal-100">SAMHSA National Helpline</div>
+                            <div class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">1-800-662-4357 — free, confidential, 24/7</div>
+                        </div>
+                        <i class="fa-solid fa-phone text-teal-700 dark:text-teal-300"></i>
+                    </a>
+
+                    <a href="sms:741741?body=HOME" class="calm-card flex items-center justify-between bg-white dark:bg-slate-700 border border-slate-200 dark:border-slate-600 rounded-2xl px-4 py-3.5 hover:bg-slate-50 dark:hover:bg-slate-600 transition-colors">
+                        <div>
+                            <div class="font-semibold text-teal-900 dark:text-teal-100">Crisis Text Line</div>
+                            <div class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">Text HOME to 741741</div>
+                        </div>
+                        <i class="fa-solid fa-comment-dots text-teal-700 dark:text-teal-300"></i>
+                    </a>
+
+                    <div class="bg-red-50 dark:bg-red-900/20 border border-red-100 dark:border-red-800 rounded-2xl px-4 py-3 text-red-700 dark:text-red-300 text-sm font-medium flex items-start gap-2">
+                        <i class="fa-solid fa-triangle-exclamation mt-0.5"></i>
+                        <span>If you're in immediate danger, call 911 (or your local emergency number).</span>
+                    </div>
+
+                    <p class="text-[11px] text-slate-400 dark:text-slate-500 text-center leading-relaxed">
+                        Anchor is a self-help tool and not a substitute for professional treatment.
+                    </p>
+                </div>
+            `;
+
+            await showModal({
+                title: 'Crisis Support',
+                html: content,
+                actions: [
+                    { label: 'Close', variant: 'primary' }
+                ],
+                closeOnBackdrop: true
+            });
+        }
+
         // ==================== SETTINGS ====================
         async function showSettings() {
             const longest = calculateLongestStreak();
@@ -1239,6 +1727,59 @@
                                 ${document.documentElement.classList.contains('dark') ? 'Switch to Light' : 'Switch to Dark'}
                             </button>
                         </div>
+                    </div>
+
+                    <!-- App Lock -->
+                    <div>
+                        <div class="font-semibold text-teal-900 dark:text-teal-200 mb-2 flex items-center gap-2">
+                            <i class="fa-solid fa-lock w-4"></i> App Lock
+                        </div>
+                        <div class="flex items-center justify-between bg-white dark:bg-slate-700 border border-slate-200 dark:border-slate-600 rounded-2xl px-4 py-3 ${isPinLockEnabled() ? 'mb-2' : ''}">
+                            <div>
+                                <div class="font-medium text-slate-700 dark:text-slate-200">Require PIN to open</div>
+                                <div class="text-[11px] text-slate-500 dark:text-slate-400">Adds a privacy lock screen on launch</div>
+                            </div>
+                            <button onclick="togglePinLockFromSettings()" class="px-3 py-1 text-xs font-semibold rounded-xl border border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-800 hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors">
+                                ${isPinLockEnabled() ? 'Disable' : 'Enable'}
+                            </button>
+                        </div>
+                        ${isPinLockEnabled() ? `
+                        <button onclick="changePinFromSettings()"
+                                class="w-full flex items-center justify-center gap-2 px-4 py-2.5 rounded-2xl border border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-700 hover:bg-slate-50 dark:hover:bg-slate-600 text-sm font-medium transition-colors">
+                            <i class="fa-solid fa-key"></i>
+                            <span>Change PIN</span>
+                        </button>
+                        <div id="biometric-row-container"></div>
+                        ` : ''}
+                        <p class="text-[10px] text-slate-500 dark:text-slate-400 mt-2 leading-tight">
+                            Your PIN is stored only on this device and is never included in exported backups. It locks the app screen — it does not encrypt your data.
+                        </p>
+                    </div>
+
+                    <!-- Daily Reminder -->
+                    <div>
+                        <div class="font-semibold text-teal-900 dark:text-teal-200 mb-2 flex items-center gap-2">
+                            <i class="fa-solid fa-bell w-4"></i> Daily Reminder
+                        </div>
+                        <div class="flex items-center justify-between bg-white dark:bg-slate-700 border border-slate-200 dark:border-slate-600 rounded-2xl px-4 py-3 ${isReminderEnabled() ? 'mb-2' : ''}">
+                            <div>
+                                <div class="font-medium text-slate-700 dark:text-slate-200">Remind me to check in</div>
+                                <div class="text-[11px] text-slate-500 dark:text-slate-400">A gentle nudge if you haven't checked in yet</div>
+                            </div>
+                            <button onclick="toggleReminderFromSettings()" class="px-3 py-1 text-xs font-semibold rounded-xl border border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-800 hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors">
+                                ${isReminderEnabled() ? 'Turn Off' : 'Turn On'}
+                            </button>
+                        </div>
+                        ${isReminderEnabled() ? `
+                        <div class="flex items-center justify-between bg-white dark:bg-slate-700 border border-slate-200 dark:border-slate-600 rounded-2xl px-4 py-3">
+                            <div class="font-medium text-slate-700 dark:text-slate-200 text-sm">Reminder time</div>
+                            <input type="time" value="${getReminderTime()}" onchange="updateReminderTime(this.value)"
+                                   class="border border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-800 rounded-xl px-2 py-1.5 text-sm text-slate-700 dark:text-slate-200">
+                        </div>
+                        ` : ''}
+                        <p class="text-[10px] text-slate-500 dark:text-slate-400 mt-2 leading-tight">
+                            Reminders appear while Anchor is open in this browser tab, on days you haven't checked in yet.
+                        </p>
                     </div>
 
                     <!-- Data Management -->
@@ -1339,9 +1880,9 @@
                     </div>
 
                     <!-- About -->
-                    <div class="text-[11px] text-center text-slate-500 dark:text-slate-400 pt-1">
-                        Anchor — Private recovery companion (Beta).<br>
-                        Your data never leaves this device.
+                    <div class="text-[11px] text-center text-slate-500 dark:text-slate-400 pt-1 space-y-1.5 leading-relaxed">
+                        <p>Anchor — Private recovery companion (Beta).<br>Your data never leaves this device.</p>
+                        <p>App Lock, if enabled, is a screen lock for privacy — it does not encrypt your data. Crisis Support is always available, even when the app is locked.</p>
                     </div>
                 </div>
             `;
@@ -1359,6 +1900,9 @@
             setTimeout(() => {
                 initSampleFlavorChips();
             }, 30);
+
+            // Show the biometric toggle if running natively and biometrics are available
+            renderBiometricToggle();
         }
 
         function toggleThemeFromSettings(btn) {
@@ -1366,6 +1910,56 @@
             // Update button text live
             const isDark = document.documentElement.classList.contains('dark');
             btn.textContent = isDark ? 'Switch to Light' : 'Switch to Dark';
+        }
+
+        function togglePinLockFromSettings() {
+            if (isPinLockEnabled()) {
+                hideModal();
+                startPinVerify(() => {
+                    clearPin();
+                    showToast('PIN lock disabled.');
+                    showSettings();
+                }, 'Enter your PIN to disable lock', showSettings);
+            } else {
+                hideModal();
+                startPinSetup(() => {
+                    showToast('PIN lock enabled.');
+                    showSettings();
+                }, showSettings);
+            }
+        }
+
+        function changePinFromSettings() {
+            hideModal();
+            startPinVerify(() => {
+                startPinSetup(() => {
+                    showToast('PIN changed.');
+                    showSettings();
+                }, showSettings);
+            }, 'Enter your current PIN', showSettings);
+        }
+
+        async function toggleReminderFromSettings() {
+            if (isReminderEnabled()) {
+                localStorage.setItem('anchor_reminder_enabled', 'false');
+                scheduleReminder(null);
+                showToast('Daily reminder turned off.');
+            } else {
+                if ('Notification' in window && Notification.permission === 'default') {
+                    await Notification.requestPermission();
+                }
+                localStorage.setItem('anchor_reminder_enabled', 'true');
+                scheduleReminder(getReminderTime());
+                showToast('Daily reminder turned on.');
+            }
+            showSettings();
+        }
+
+        function updateReminderTime(value) {
+            localStorage.setItem('anchor_reminder_time', value);
+            localStorage.removeItem('anchor_reminder_last_fired');
+            if (isReminderEnabled()) scheduleReminder(value);
+            showToast('Reminder time updated.');
         }
 
         async function importDataFromSettings() {
@@ -2272,14 +2866,6 @@
             // Initial render of trigger chips for check-in screen
             initTriggerChips();
 
-            // Show home screen
-            showScreen('home');
-
-            // Make sure first load looks good
-            setTimeout(() => {
-                updateHomeScreen();
-            }, 50);
-
             // Keyboard support for enter in custom trigger
             const customInput = document.getElementById('custom-trigger-input');
             if (customInput) {
@@ -2290,8 +2876,46 @@
                 });
             }
 
+            // Wire up native app lifecycle (re-lock on background), no-op on web
+            initCapacitorAppLifecycle();
+
+            // If App Lock is enabled, hold the app behind the PIN screen until unlocked
+            if (isPinLockEnabled()) {
+                showLockScreen(finishAppInit);
+            } else {
+                finishAppInit();
+            }
+
             console.log('%c[Anchor] Recovery companion initialized. All data is stored locally.', 'color:#64748b');
         }
+
+        // Finish bringing up the app UI (called immediately, or after PIN unlock)
+        function finishAppInit() {
+            // Show home screen
+            showScreen('home');
+
+            // Make sure first load looks good
+            setTimeout(() => {
+                updateHomeScreen();
+            }, 50);
+
+            // Daily check-in reminders
+            if (isReminderEnabled()) {
+                scheduleReminder(getReminderTime());
+            }
+            checkReminderNotification();
+            setInterval(checkReminderNotification, 5 * 60 * 1000);
+        }
+
+        // Re-lock immediately whenever the app is backgrounded (tab switch, minimize, etc.)
+        document.addEventListener('visibilitychange', () => {
+            if (document.hidden && isPinLockEnabled()) {
+                const overlay = document.getElementById('pin-overlay');
+                if (overlay.classList.contains('hidden')) {
+                    showLockScreen(null);
+                }
+            }
+        });
 
         // Boot the app
         window.onload = initializeApp;
