@@ -1544,8 +1544,10 @@
             const AppPlugin = window.Capacitor && window.Capacitor.Plugins && window.Capacitor.Plugins.App;
             if (!AppPlugin) return;
 
-            AppPlugin.addListener('appStateChange', ({ isActive }) => {
-                if (!isActive && isPinLockEnabled()) {
+            // 'pause' fires reliably when the app is backgrounded; 'appStateChange' does not
+            // fire with isActive:false on Android, so it can't be used for re-lock here.
+            AppPlugin.addListener('pause', () => {
+                if (isPinLockEnabled()) {
                     const overlay = document.getElementById('pin-overlay');
                     if (overlay.classList.contains('hidden')) {
                         showLockScreen(null);
