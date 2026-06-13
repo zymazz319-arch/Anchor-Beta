@@ -8,9 +8,8 @@ except `capacitor.config.json`, `package.json`, and native project files under `
 
 ## What's included
 
-- `capacitor.config.json` — app ID `com.anchor.recoverycompanion`, app name `Anchor`, web dir `www`.
-  **Change the app ID** to one you control before publishing to the Play Store (it cannot be
-  changed after the first release).
+- `capacitor.config.json` — app ID `com.zyapp.anchor.recoverycompanion`, app name `Anchor`, web dir `www`.
+  This app ID cannot be changed after the first Play Store release.
 - `sync-web.js` — copies `../index.html` into `www/index.html` so Capacitor can bundle it.
 - `android/` — the generated native Android (Gradle) project.
 - Plugins installed: `@capacitor/app`, `@capacitor/local-notifications`, `capacitor-native-biometric`.

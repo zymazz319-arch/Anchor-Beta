@@ -1,4 +1,4 @@
-package com.anchor.recoverycompanion;
+package com.zyapp.anchor.recoverycompanion;
 
 import com.getcapacitor.BridgeActivity;
 

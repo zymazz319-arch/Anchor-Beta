@@ -1,10 +1,10 @@
 apply plugin: 'com.android.application'
 
 android {
-    namespace "com.anchor.recoverycompanion"
+    namespace "com.zyapp.anchor.recoverycompanion"
     compileSdk rootProject.ext.compileSdkVersion
     defaultConfig {
-        applicationId "com.anchor.recoverycompanion"
+        applicationId "com.zyapp.anchor.recoverycompanion"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
