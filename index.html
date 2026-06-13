@@ -220,7 +220,6 @@
                 <div>
                     <div class="flex items-center gap-x-2">
                         <h1 class="heading-serif text-2xl font-semibold tracking-tight text-teal-900">Anchor</h1>
-                        <span class="text-[9px] font-semibold tracking-[1px] px-1.5 py-0.5 rounded bg-amber-100 text-amber-700 dark:bg-amber-900/60 dark:text-amber-300">BETA</span>
                     </div>
                     <p class="text-[10px] text-teal-700/70 -mt-1">Your recovery companion</p>
                 </div>
@@ -338,28 +337,20 @@
                 </div>
             </div>
 
-            <!-- Welcome / Sample Data CTA (shown only when no data) -->
+            <!-- Welcome card (shown only when no data) -->
             <div id="home-welcome" class="hidden calm-card bg-white dark:bg-slate-800 border border-teal-100 dark:border-teal-900 rounded-3xl p-5 mb-3">
                 <div class="flex items-start gap-3">
                     <div class="w-9 h-9 bg-teal-100 dark:bg-teal-900/60 text-teal-700 dark:text-teal-300 rounded-2xl flex items-center justify-center flex-shrink-0 mt-0.5">
                         <i class="fa-solid fa-seedling text-xl"></i>
                     </div>
                     <div class="flex-1 min-w-0">
-                        <div class="flex items-center gap-x-2">
-                            <div class="font-semibold text-teal-900 dark:text-teal-100">Welcome to Anchor</div>
-                            <span class="text-[9px] font-semibold px-1.5 py-px rounded bg-amber-100 text-amber-700 dark:bg-amber-900/60 dark:text-amber-300">BETA</span>
-                        </div>
+                        <div class="font-semibold text-teal-900 dark:text-teal-100">Welcome to Anchor</div>
                         <p class="text-sm text-slate-600 dark:text-slate-300 mt-1 leading-relaxed">
-                            This is a private beta test. Everything stays on your device. To explore the full app (charts, insights, streaks, journaling), you can load realistic sample data.
+                            Everything stays on your device. Your first check-in is the start of seeing your patterns, streaks, and progress over time.
                         </p>
                         <div class="flex flex-wrap gap-2 mt-4">
-                            <button onclick="loadSampleData(true)"
-                                    class="px-5 py-2.5 bg-teal-700 hover:bg-teal-800 active:bg-teal-900 transition text-white text-sm font-semibold rounded-2xl flex items-center gap-x-2">
-                                <i class="fa-solid fa-magic"></i>
-                                <span>Load 48 days of sample data</span>
-                            </button>
                             <button onclick="showScreen('checkin')"
-                                    class="px-5 py-2.5 border border-teal-200 dark:border-teal-700 hover:bg-teal-50 dark:hover:bg-teal-900/30 text-teal-700 dark:text-teal-200 text-sm font-medium rounded-2xl transition">
+                                    class="px-5 py-2.5 bg-teal-700 hover:bg-teal-800 active:bg-teal-900 transition text-white text-sm font-semibold rounded-2xl">
                                 Start my first check-in
                             </button>
                         </div>
@@ -495,25 +486,6 @@
                               class="recovery-input w-full text-sm border border-slate-200 rounded-2xl px-4 py-3 resize-y"></textarea>
                 </div>
 
-                <!-- Quick Sample Tools (for testing & sampling the app) -->
-                <div class="pt-1 pb-1">
-                    <div class="flex items-center justify-between text-[10px] text-slate-500 dark:text-slate-400 mb-1.5 px-1">
-                        <span>Quick sample tools</span>
-                    </div>
-                    <div class="grid grid-cols-2 gap-2">
-                        <button onclick="addQuickSampleDay(0)"
-                                class="text-xs py-2.5 rounded-2xl border border-teal-200 dark:border-teal-700 bg-teal-50 dark:bg-teal-900/30 hover:bg-teal-100 dark:hover:bg-teal-900/50 text-teal-700 dark:text-teal-200 font-medium flex items-center justify-center gap-x-1.5 transition-colors">
-                            <i class="fa-solid fa-plus text-xs"></i>
-                            <span>Add sample day (today)</span>
-                        </button>
-                        <button onclick="addQuickSampleDay(1)"
-                                class="text-xs py-2.5 rounded-2xl border border-teal-200 dark:border-teal-700 bg-teal-50 dark:bg-teal-900/30 hover:bg-teal-100 dark:hover:bg-teal-900/50 text-teal-700 dark:text-teal-200 font-medium flex items-center justify-center gap-x-1.5 transition-colors">
-                            <i class="fa-solid fa-plus text-xs"></i>
-                            <span>Add sample day (yesterday)</span>
-                        </button>
-                    </div>
-                </div>
-
                 <!-- Save Button -->
                 <div class="pt-2 pb-4">
                     <button onclick="saveCheckIn()"
@@ -547,11 +519,7 @@
             <div id="triggers-empty" class="hidden text-center py-8 text-slate-400 dark:text-slate-500">
                 <i class="fa-solid fa-list-check text-2xl mb-2"></i>
                 <p class="text-sm">No triggers logged yet.</p>
-                <button onclick="loadSampleData(true); showScreen('triggers')" 
-                        class="mt-3 px-4 py-1.5 text-xs bg-teal-600 hover:bg-teal-700 text-white font-medium rounded-2xl inline-flex items-center gap-x-2">
-                    <i class="fa-solid fa-magic"></i>
-                    <span>Load sample data</span>
-                </button>
+                <p class="text-xs mt-1">They'll show up here as you complete check-ins.</p>
             </div>
         </div>
 
@@ -565,11 +533,10 @@
             <div id="insights-empty" class="hidden bg-white dark:bg-slate-800 rounded-3xl p-8 text-center border border-slate-100 dark:border-slate-700">
                 <i class="fa-solid fa-chart-line text-3xl text-slate-300 dark:text-slate-600 mb-3"></i>
                 <p class="font-medium text-slate-600 dark:text-slate-200">Not enough data yet</p>
-                <p class="text-sm text-slate-400 dark:text-slate-400 mt-1 mb-4">Complete a few check-ins or load sample data to unlock insights and patterns.</p>
-                <button onclick="loadSampleData(true); showScreen('insights')" 
+                <p class="text-sm text-slate-400 dark:text-slate-400 mt-1 mb-4">Complete a few check-ins to unlock insights and patterns.</p>
+                <button onclick="showScreen('checkin')"
                         class="px-5 py-2 bg-teal-700 hover:bg-teal-800 text-white text-sm font-semibold rounded-2xl inline-flex items-center gap-x-2">
-                    <i class="fa-solid fa-magic"></i>
-                    <span>Load sample data</span>
+                    <span>Start check-in</span>
                 </button>
             </div>
 
@@ -626,10 +593,10 @@
             <div id="journal-empty" class="hidden bg-white dark:bg-slate-800 rounded-3xl p-8 text-center border border-slate-100 dark:border-slate-700">
                 <i class="fa-solid fa-book text-2xl text-slate-300 dark:text-slate-600 mb-3"></i>
                 <p class="text-slate-500 dark:text-slate-300 text-sm">Your reflections will appear here.</p>
-                <button onclick="loadSampleData(true); showScreen('journal')" 
+                <button onclick="showNewJournalEntry()"
                         class="mt-4 px-4 py-2 text-xs bg-teal-600 hover:bg-teal-700 text-white font-medium rounded-2xl inline-flex items-center gap-x-2">
-                    <i class="fa-solid fa-magic"></i>
-                    <span>Load sample data to try journaling</span>
+                    <i class="fa-solid fa-pen"></i>
+                    <span>Write your first entry</span>
                 </button>
             </div>
         </div>
@@ -1193,7 +1160,7 @@
                 previewEl.classList.add('hidden');
             }
 
-            // Show welcome / sample data prompt when completely empty
+            // Show welcome card when completely empty
             const welcomeEl = document.getElementById('home-welcome');
             if (welcomeEl) {
                 if (checkins.length === 0) {
@@ -1702,18 +1669,20 @@
 
             const content = `
                 <div class="space-y-5 text-sm">
+                    ${!isNativeApp() ? `
                     <!-- PWA / Install -->
                     <div>
                         <div class="font-semibold text-teal-900 dark:text-teal-200 mb-2 flex items-center gap-2">
                             <i class="fa-solid fa-mobile-alt w-4"></i> App
                         </div>
-                        <button onclick="promptInstall(); hideModal();" 
+                        <button onclick="promptInstall(); hideModal();"
                                 class="w-full flex items-center justify-center gap-2 px-4 py-3 rounded-2xl border border-teal-600 bg-teal-700 hover:bg-teal-800 text-white text-sm font-semibold transition-colors">
                             <i class="fa-solid fa-download"></i>
                             <span>Install Anchor on this device</span>
                         </button>
                         <p class="text-[10px] text-center text-teal-700 dark:text-teal-400 mt-1.5">Works offline • Feels like a native app</p>
                     </div>
+                    ` : ''}
 
                     <!-- Appearance -->
                     <div>
@@ -1811,50 +1780,6 @@
                         <p class="text-[10px] text-center text-slate-500 dark:text-slate-400 mt-2">All data lives only in this browser. Export regularly.</p>
                     </div>
 
-                    <!-- Sample Data (for exploring the app) -->
-                    <div>
-                        <div class="font-semibold text-teal-900 dark:text-teal-200 mb-2 flex items-center gap-2">
-                            <i class="fa-solid fa-flask w-4"></i> Sample Data
-                        </div>
-
-                        <!-- Flavor selector -->
-                        <div class="mb-2">
-                            <div class="text-xs text-slate-500 dark:text-slate-400 mb-1.5 px-1">Choose flavor:</div>
-                            <div id="sample-flavor-chips" class="flex flex-wrap gap-1.5">
-                                <button data-flavor="balanced" class="sample-flavor-chip active px-3 py-1 text-xs font-medium rounded-2xl border bg-teal-700 text-white border-teal-700">Balanced</button>
-                                <button data-flavor="good-period" class="sample-flavor-chip px-3 py-1 text-xs font-medium rounded-2xl border border-slate-200 dark:border-slate-600 hover:bg-slate-50 dark:hover:bg-slate-700">Good Period</button>
-                                <button data-flavor="rough-patch" class="sample-flavor-chip px-3 py-1 text-xs font-medium rounded-2xl border border-slate-200 dark:border-slate-600 hover:bg-slate-50 dark:hover:bg-slate-700">Rough Patch</button>
-                                <button data-flavor="relapse-recovery" class="sample-flavor-chip px-3 py-1 text-xs font-medium rounded-2xl border border-slate-200 dark:border-slate-600 hover:bg-slate-50 dark:hover:bg-slate-700">Relapse + Recovery</button>
-                                <button data-flavor="improving" class="sample-flavor-chip px-3 py-1 text-xs font-medium rounded-2xl border border-slate-200 dark:border-slate-600 hover:bg-slate-50 dark:hover:bg-slate-700">Improving Trend</button>
-                                <button data-flavor="high-urge" class="sample-flavor-chip px-3 py-1 text-xs font-medium rounded-2xl border border-slate-200 dark:border-slate-600 hover:bg-slate-50 dark:hover:bg-slate-700">High Urge</button>
-                            </div>
-                        </div>
-
-                        <div class="space-y-2">
-                            <button onclick="loadSampleDataFromSettings(true)"
-                                    class="w-full flex items-center justify-center gap-2 px-4 py-3.5 rounded-2xl bg-teal-700 hover:bg-teal-800 active:bg-teal-900 text-white text-sm font-semibold transition-all shadow-sm">
-                                <i class="fa-solid fa-magic"></i>
-                                <span>Load 48 Days (Replace)</span>
-                            </button>
-                            
-                            <button onclick="loadSampleDataFromSettings(false)"
-                                    class="w-full flex items-center justify-center gap-2 px-4 py-3 rounded-2xl border border-teal-200 dark:border-teal-700 bg-teal-50 dark:bg-teal-900/30 hover:bg-teal-100 dark:hover:bg-teal-900/50 text-teal-800 dark:text-teal-200 text-sm font-medium transition-colors">
-                                <i class="fa-solid fa-plus"></i>
-                                <span>Add to Existing Data (Merge)</span>
-                            </button>
-                        </div>
-
-                        <button onclick="resetToCleanSlate(); hideModal();"
-                                class="mt-3 w-full text-xs py-2 text-red-600 dark:text-red-400 hover:text-red-700 flex items-center justify-center gap-1.5">
-                            <i class="fa-solid fa-undo"></i>
-                            <span>Reset to Clean Slate</span>
-                        </button>
-
-                        <p class="text-[10px] text-center text-slate-500 dark:text-slate-400 mt-2 leading-tight">
-                            Different flavors create different patterns so you can test Insights, streaks, and recovery arcs.
-                        </p>
-                    </div>
-
                     <!-- Stats -->
                     <div class="bg-slate-50 dark:bg-slate-700/60 rounded-2xl px-4 py-3 text-xs">
                         <div class="flex justify-between text-slate-600 dark:text-slate-300">
@@ -1867,23 +1792,9 @@
                         </div>
                     </div>
 
-                    <!-- Give Feedback -->
-                    <div>
-                        <div class="font-semibold text-teal-900 dark:text-teal-200 mb-2 flex items-center gap-2">
-                            <i class="fa-solid fa-comment-dots w-4"></i> Give Feedback
-                        </div>
-                        <div class="bg-slate-50 dark:bg-slate-700/60 rounded-2xl p-4 text-sm">
-                            <p class="text-slate-600 dark:text-slate-300">Thank you for testing Anchor!</p>
-                            <p class="text-slate-500 dark:text-slate-400 text-xs mt-2 leading-relaxed">
-                                Please use this form:<br>
-                                <span class="text-teal-700 dark:text-teal-300 font-medium">https://zymazz319-arch.github.io/Anchor-Beta/feedback/anchor-feedback-form.html</span>
-                            </p>
-                        </div>
-                    </div>
-
                     <!-- About -->
                     <div class="text-[11px] text-center text-slate-500 dark:text-slate-400 pt-1 space-y-1.5 leading-relaxed">
-                        <p>Anchor — Private recovery companion (Beta).<br>Your data never leaves this device.</p>
+                        <p>Anchor — Private recovery companion.<br>Your data never leaves this device.</p>
                         <p>App Lock, if enabled, is a screen lock for privacy — it does not encrypt your data. Crisis Support is always available, even when the app is locked.</p>
                     </div>
                 </div>
@@ -1897,11 +1808,6 @@
                 ],
                 closeOnBackdrop: true
             });
-
-            // Wire up flavor chips after modal is in DOM
-            setTimeout(() => {
-                initSampleFlavorChips();
-            }, 30);
 
             // Show the biometric toggle if running natively and biometrics are available
             renderBiometricToggle();
@@ -2153,308 +2059,6 @@
                 showToast('Thanks for installing Anchor.');
             }
             deferredInstallPrompt = null;
-        }
-
-        // ==================== SAMPLE DATA GENERATOR (flavored + powerful sampling) ====================
-        function generateSampleData(flavor = 'balanced', days = 48) {
-            const generatedCheckins = [];
-            const generatedJournals = [];
-            const generatedCustom = ["Family stress", "Social media doomscrolling"];
-
-            const today = new Date();
-            const start = new Date(today);
-            start.setDate(start.getDate() - (days - 1));
-
-            // Flavor modifiers
-            let moodBias = 0, compulsionBias = 0, variance = 1.0, recoveryTrend = 0;
-            let extraNegativeTriggers = false, extraPositiveNotes = false;
-
-            switch (flavor) {
-                case 'good-period':
-                    moodBias = +1.8;
-                    compulsionBias = -1.5;
-                    variance = 0.7;
-                    extraPositiveNotes = true;
-                    break;
-                case 'rough-patch':
-                    moodBias = -1.6;
-                    compulsionBias = +2.0;
-                    variance = 1.3;
-                    extraNegativeTriggers = true;
-                    break;
-                case 'relapse-recovery':
-                    // Starts okay, gets bad mid-way, then strong recovery
-                    recoveryTrend = 1;
-                    moodBias = -0.5;
-                    compulsionBias = +0.8;
-                    variance = 1.15;
-                    break;
-                case 'improving':
-                    recoveryTrend = 1;
-                    moodBias = -0.3;
-                    compulsionBias = +0.4;
-                    variance = 0.9;
-                    break;
-                case 'high-urge':
-                    compulsionBias = +2.8;
-                    moodBias = -0.8;
-                    variance = 1.1;
-                    break;
-                case 'balanced':
-                default:
-                    // Default varied realistic data
-                    break;
-            }
-
-            for (let i = 0; i < days; i++) {
-                const d = new Date(start);
-                d.setDate(d.getDate() + i);
-                const dateStr = d.toISOString().split('T')[0];
-                const dayOfWeek = d.getDay();
-                const progress = i / (days - 1);
-
-                // Base curves
-                let mood = 5.7 + Math.sin(i / 4.1) * 1.5 + (Math.random() - 0.5) * 2.0 * variance;
-
-                // Apply recovery / relapse trend
-                if (recoveryTrend > 0) {
-                    const trendEffect = (progress - 0.5) * 3.5 * recoveryTrend;
-                    mood += trendEffect;
-                    if (flavor === 'relapse-recovery' && progress > 0.35 && progress < 0.55) {
-                        mood -= 2.2; // the "relapse" dip
-                    }
-                }
-
-                mood = Math.max(2, Math.min(10, Math.round(mood + moodBias)));
-
-                let loneliness = 3.1 + Math.sin(i / 3.0) * 2.6 + (Math.random() - 0.5) * 2.2 * variance;
-                loneliness = Math.max(1, Math.min(9, Math.round(loneliness)));
-
-                let anger = 2.3 + (Math.random() - 0.5) * 3.0 * variance;
-                if (dayOfWeek === 1) anger += 2.0;
-                if (flavor === 'rough-patch' && Math.random() < 0.25) anger += 2.5;
-                anger = Math.max(1, Math.min(9, Math.round(anger)));
-
-                let tired = 2.9 + (dayOfWeek === 0 || dayOfWeek === 6 ? 2.6 : 0) + (Math.random() - 0.5) * 2.1 * variance;
-                tired = Math.max(1, Math.min(9, Math.round(tired)));
-
-                let hunger = 2.7 + (Math.random() * 3.0);
-                hunger = Math.max(1, Math.min(9, Math.round(hunger)));
-
-                let compulsion = 3.0 + (loneliness - 4) * 0.9 + (anger - 3) * 0.6 + (Math.random() - 0.5) * 1.9 * variance + compulsionBias;
-                if (flavor === 'relapse-recovery' && progress > 0.35 && progress < 0.55) compulsion += 2.5;
-                compulsion = Math.max(1, Math.min(10, Math.round(compulsion)));
-
-                // Trigger logic (flavor aware)
-                const triggers = [];
-                if (loneliness >= 6) triggers.push("Loneliness");
-                if (anger >= 6) triggers.push("Anger/Frustration");
-                if (tired >= 7) triggers.push("Tiredness");
-                if (Math.random() < (0.30 + (extraNegativeTriggers ? 0.15 : 0))) triggers.push("Stress");
-                if (Math.random() < (0.26 + (extraNegativeTriggers ? 0.1 : 0))) triggers.push("Boredom");
-                if (Math.random() < 0.17) triggers.push("Anxiety");
-                if (dayOfWeek === 5 && Math.random() < 0.55) triggers.push("Celebration / \"I deserve this\"");
-                if (extraNegativeTriggers && Math.random() < 0.22) triggers.push("Money worries");
-
-                let uniqueTriggers = [...new Set(triggers)];
-                if (uniqueTriggers.length === 0) {
-                    uniqueTriggers.push(Math.random() < 0.5 ? "Boredom" : "Stress");
-                }
-
-                // Notes
-                let note = null;
-                const noteChance = extraPositiveNotes ? 0.28 : 0.22;
-                if (Math.random() < noteChance) {
-                    const notes = extraPositiveNotes ? [
-                        "Used my tools and it actually worked today. Feeling hopeful.",
-                        "Grateful for my support network — reached out and it helped.",
-                        "Small consistent actions are adding up. Proud of myself."
-                    ] : [
-                        "Used breathing + went for a walk. The urge passed.",
-                        "Called my sponsor. Felt 10x lighter afterwards.",
-                        "Almost slipped but played the tape through. Didn't do it.",
-                        "Felt very disconnected but reached out anyway.",
-                        "Rough conversation with family but I stayed calm."
-                    ];
-                    note = notes[Math.floor(Math.random() * notes.length)];
-                }
-
-                generatedCheckins.push({
-                    id: 'sample-' + flavor + '-' + i,
-                    date: dateStr,
-                    mood, hunger: Math.round(hunger), anger: Math.round(anger),
-                    loneliness: Math.round(loneliness), tired: Math.round(tired),
-                    compulsion: Math.round(compulsion),
-                    triggers: uniqueTriggers,
-                    note,
-                    createdAt: d.toISOString()
-                });
-            }
-
-            // Journal entries (more generous)
-            const journalTexts = [
-                "I stayed with the discomfort instead of trying to numb it. That felt like a real shift.",
-                "Grateful for the small things today — my morning coffee, the light through the window, and waking up sober.",
-                "Reached out to two people instead of isolating. That made the biggest difference all week.",
-                "Hard day at work. Used the 'play the tape' technique and didn't act on the urge. Really proud of that.",
-                "Realized that boredom is often just loneliness wearing a different mask for me.",
-                "Celebrated three weeks without the old behavior. I barely even thought about it today — that feels huge.",
-                "Had a really tough conversation with my brother. I was honest instead of shutting down. Progress.",
-                "Today I chose not to isolate even though every part of me wanted to. Small but meaningful."
-            ];
-
-            for (let j = 0; j < 8; j++) {
-                const offset = Math.floor(3 + j * ((days - 6) / 8));
-                const jd = new Date(start);
-                jd.setDate(jd.getDate() + offset);
-                const jdate = jd.toISOString().split('T')[0];
-
-                generatedJournals.push({
-                    id: 'j-' + flavor + '-' + j,
-                    date: jdate,
-                    prompt: JOURNAL_PROMPTS[j % JOURNAL_PROMPTS.length],
-                    response: journalTexts[j % journalTexts.length],
-                    createdAt: jd.toISOString()
-                });
-            }
-
-            return {
-                checkins: generatedCheckins,
-                journalEntries: generatedJournals,
-                customTriggers: generatedCustom
-            };
-        }
-
-        async function loadSampleData(flavor = 'balanced', replaceAll = true) {
-            const sample = generateSampleData(flavor, 48);
-
-            const flavorName = {
-                'balanced': 'Balanced & Realistic',
-                'good-period': 'Good Period',
-                'rough-patch': 'Rough Patch',
-                'relapse-recovery': 'Relapse + Recovery',
-                'improving': 'Improving Trend',
-                'high-urge': 'High Urge Period'
-            }[flavor] || 'Sample';
-
-            if (replaceAll) {
-                const confirmed = await showConfirm(
-                    `Load ${flavorName}?`,
-                    `This will replace your current data with 48 days of "${flavorName}" sample data.\n\nYour existing data will be lost unless you have exported a backup.`
-                );
-                if (!confirmed) return;
-
-                checkins = sample.checkins;
-                journalEntries = sample.journalEntries;
-                customTriggers = sample.customTriggers;
-            } else {
-                const confirmed = await showConfirm(
-                    `Add ${flavorName}?`,
-                    `This will merge 48 days of "${flavorName}" sample data into what you already have (non-overlapping dates only).`
-                );
-                if (!confirmed) return;
-
-                const existingDates = new Set(checkins.map(c => c.date));
-                sample.checkins.forEach(c => { if (!existingDates.has(c.date)) checkins.push(c); });
-                sample.journalEntries.forEach(j => {
-                    if (!journalEntries.some(e => e.id === j.id)) journalEntries.push(j);
-                });
-                sample.customTriggers.forEach(t => {
-                    if (!customTriggers.includes(t)) customTriggers.push(t);
-                });
-            }
-
-            checkins.sort((a, b) => b.date.localeCompare(a.date));
-            saveToStorage();
-
-            showToast(`${flavorName} data loaded!`);
-
-            setTimeout(() => {
-                const active = document.querySelector('.screen.active');
-                if (active) {
-                    const name = active.id.replace('screen-', '');
-                    if (name === 'home') updateHomeScreen();
-                    if (name === 'triggers') renderTriggersList();
-                    if (name === 'insights') renderInsights();
-                    if (name === 'journal') renderJournalEntries();
-                }
-                showScreen('home');
-            }, 60);
-        }
-
-        // Helper used by the new flavored Settings UI
-        let currentSampleFlavor = 'balanced';
-
-        function initSampleFlavorChips() {
-            const container = document.getElementById('sample-flavor-chips');
-            if (!container) return;
-
-            container.querySelectorAll('button[data-flavor]').forEach(btn => {
-                btn.onclick = () => {
-                    container.querySelectorAll('button[data-flavor]').forEach(b => {
-                        b.classList.remove('active', 'bg-teal-700', 'text-white', 'border-teal-700');
-                        b.classList.add('border-slate-200', 'dark:border-slate-600');
-                    });
-                    btn.classList.add('active', 'bg-teal-700', 'text-white', 'border-teal-700');
-                    btn.classList.remove('border-slate-200', 'dark:border-slate-600');
-                    currentSampleFlavor = btn.dataset.flavor;
-                };
-            });
-        }
-
-        function loadSampleDataFromSettings(replaceAll) {
-            const flavor = currentSampleFlavor || 'balanced';
-            loadSampleData(flavor, replaceAll);
-            // hideModal is called from the button onclick
-        }
-
-        async function resetToCleanSlate() {
-            const ok = await showConfirm(
-                "Reset to Clean Slate?",
-                "This will permanently delete ALL check-ins, journal entries, custom triggers, and settings.\n\nThis cannot be undone."
-            );
-            if (!ok) return;
-
-            localStorage.removeItem('anchor_checkins');
-            localStorage.removeItem('anchor_custom_triggers');
-            localStorage.removeItem('anchor_journal');
-            localStorage.removeItem('anchor_theme');
-
-            showToast("App reset. Refreshing...");
-            setTimeout(() => location.reload(), 650);
-        }
-
-        // Quick sample day adder (very useful for testing)
-        async function addQuickSampleDay(offsetDays = 0) {
-            const d = new Date();
-            d.setDate(d.getDate() - offsetDays);
-            const dateStr = d.toISOString().split('T')[0];
-
-            // Generate one realistic day using the balanced flavor logic
-            const sample = generateSampleData('balanced', 3);
-            const dayData = sample.checkins.find(c => c.date === dateStr) || sample.checkins[0];
-            dayData.date = dateStr; // force correct date
-            dayData.id = 'quick-' + Date.now();
-
-            const existing = checkins.findIndex(c => c.date === dateStr);
-            if (existing !== -1) {
-                const replace = await showConfirm("Day already exists", `Replace the check-in for ${dateStr}?`);
-                if (!replace) return;
-                checkins[existing] = dayData;
-            } else {
-                checkins.push(dayData);
-            }
-
-            checkins.sort((a, b) => b.date.localeCompare(a.date));
-            saveToStorage();
-
-            showToast(`Added sample day for ${offsetDays === 0 ? 'today' : 'yesterday'}.`);
-            updateHomeScreen();
-
-            // If user is on check-in screen, reset form
-            if (document.getElementById('screen-checkin').classList.contains('active')) {
-                resetCheckInForm();
-            }
         }
 
         // ==================== TRIGGERS ====================
@@ -2860,10 +2464,6 @@
             loadFromStorage();
             updateGreeting();
             initPWA();
-
-            // No automatic demo data anymore — users explicitly load rich sample data
-            // via the prominent "Load 48 days of realistic sample data" button in Settings
-            // or the welcome card on the home screen when empty. This makes the app feel intentional.
 
             // Initial render of trigger chips for check-in screen
             initTriggerChips();
