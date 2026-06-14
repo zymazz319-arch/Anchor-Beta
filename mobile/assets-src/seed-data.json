@@ -1,0 +1,274 @@
+{
+  "checkins": [
+    {
+      "id": "seed17",
+      "date": "2026-05-28",
+      "mood": 3,
+      "hunger": 6,
+      "anger": 6,
+      "loneliness": 7,
+      "tired": 6,
+      "compulsion": 7,
+      "triggers": [
+        "Stress",
+        "Tiredness"
+      ],
+      "note": null,
+      "createdAt": "2026-05-29T02:30:00.000Z"
+    },
+    {
+      "id": "seed16",
+      "date": "2026-05-29",
+      "mood": 4,
+      "hunger": 5,
+      "anger": 6,
+      "loneliness": 7,
+      "tired": 5,
+      "compulsion": 7,
+      "triggers": [],
+      "note": null,
+      "createdAt": "2026-05-30T02:30:00.000Z"
+    },
+    {
+      "id": "seed15",
+      "date": "2026-05-30",
+      "mood": 5,
+      "hunger": 5,
+      "anger": 6,
+      "loneliness": 7,
+      "tired": 5,
+      "compulsion": 6,
+      "triggers": [],
+      "note": null,
+      "createdAt": "2026-05-31T02:30:00.000Z"
+    },
+    {
+      "id": "seed14",
+      "date": "2026-05-31",
+      "mood": 5,
+      "hunger": 6,
+      "anger": 5,
+      "loneliness": 6,
+      "tired": 5,
+      "compulsion": 6,
+      "triggers": [
+        "Loneliness"
+      ],
+      "note": null,
+      "createdAt": "2026-06-01T02:30:00.000Z"
+    },
+    {
+      "id": "seed13",
+      "date": "2026-06-01",
+      "mood": 5,
+      "hunger": 6,
+      "anger": 5,
+      "loneliness": 6,
+      "tired": 6,
+      "compulsion": 6,
+      "triggers": [],
+      "note": null,
+      "createdAt": "2026-06-02T02:30:00.000Z"
+    },
+    {
+      "id": "seed12",
+      "date": "2026-06-02",
+      "mood": 5,
+      "hunger": 6,
+      "anger": 5,
+      "loneliness": 6,
+      "tired": 6,
+      "compulsion": 6,
+      "triggers": [],
+      "note": null,
+      "createdAt": "2026-06-03T02:30:00.000Z"
+    },
+    {
+      "id": "seed11",
+      "date": "2026-06-03",
+      "mood": 5,
+      "hunger": 5,
+      "anger": 5,
+      "loneliness": 6,
+      "tired": 6,
+      "compulsion": 6,
+      "triggers": [
+        "Relationship conflict"
+      ],
+      "note": null,
+      "createdAt": "2026-06-04T02:30:00.000Z"
+    },
+    {
+      "id": "seed10",
+      "date": "2026-06-04",
+      "mood": 5,
+      "hunger": 4,
+      "anger": 5,
+      "loneliness": 5,
+      "tired": 6,
+      "compulsion": 5,
+      "triggers": [],
+      "note": null,
+      "createdAt": "2026-06-05T02:30:00.000Z"
+    },
+    {
+      "id": "seed9",
+      "date": "2026-06-05",
+      "mood": 6,
+      "hunger": 4,
+      "anger": 4,
+      "loneliness": 5,
+      "tired": 5,
+      "compulsion": 4,
+      "triggers": [
+        "Boredom"
+      ],
+      "note": null,
+      "createdAt": "2026-06-06T02:30:00.000Z"
+    },
+    {
+      "id": "seed8",
+      "date": "2026-06-06",
+      "mood": 7,
+      "hunger": 4,
+      "anger": 3,
+      "loneliness": 5,
+      "tired": 5,
+      "compulsion": 4,
+      "triggers": [],
+      "note": null,
+      "createdAt": "2026-06-07T02:30:00.000Z"
+    },
+    {
+      "id": "seed7",
+      "date": "2026-06-07",
+      "mood": 7,
+      "hunger": 5,
+      "anger": 4,
+      "loneliness": 5,
+      "tired": 4,
+      "compulsion": 4,
+      "triggers": [],
+      "note": null,
+      "createdAt": "2026-06-08T02:30:00.000Z"
+    },
+    {
+      "id": "seed6",
+      "date": "2026-06-08",
+      "mood": 6,
+      "hunger": 5,
+      "anger": 4,
+      "loneliness": 4,
+      "tired": 4,
+      "compulsion": 4,
+      "triggers": [
+        "Social pressure"
+      ],
+      "note": null,
+      "createdAt": "2026-06-09T02:30:00.000Z"
+    },
+    {
+      "id": "seed5",
+      "date": "2026-06-09",
+      "mood": 6,
+      "hunger": 4,
+      "anger": 3,
+      "loneliness": 4,
+      "tired": 4,
+      "compulsion": 4,
+      "triggers": [],
+      "note": null,
+      "createdAt": "2026-06-10T02:30:00.000Z"
+    },
+    {
+      "id": "seed4",
+      "date": "2026-06-10",
+      "mood": 7,
+      "hunger": 3,
+      "anger": 2,
+      "loneliness": 4,
+      "tired": 5,
+      "compulsion": 3,
+      "triggers": [],
+      "note": null,
+      "createdAt": "2026-06-11T02:30:00.000Z"
+    },
+    {
+      "id": "seed3",
+      "date": "2026-06-11",
+      "mood": 7,
+      "hunger": 3,
+      "anger": 2,
+      "loneliness": 4,
+      "tired": 5,
+      "compulsion": 2,
+      "triggers": [
+        "Stress"
+      ],
+      "note": null,
+      "createdAt": "2026-06-12T02:30:00.000Z"
+    },
+    {
+      "id": "seed2",
+      "date": "2026-06-12",
+      "mood": 8,
+      "hunger": 3,
+      "anger": 3,
+      "loneliness": 3,
+      "tired": 5,
+      "compulsion": 2,
+      "triggers": [],
+      "note": null,
+      "createdAt": "2026-06-13T02:30:00.000Z"
+    },
+    {
+      "id": "seed1",
+      "date": "2026-06-13",
+      "mood": 8,
+      "hunger": 3,
+      "anger": 3,
+      "loneliness": 3,
+      "tired": 4,
+      "compulsion": 3,
+      "triggers": [],
+      "note": null,
+      "createdAt": "2026-06-14T02:30:00.000Z"
+    },
+    {
+      "id": "seed0",
+      "date": "2026-06-14",
+      "mood": 8,
+      "hunger": 4,
+      "anger": 2,
+      "loneliness": 4,
+      "tired": 4,
+      "compulsion": 3,
+      "triggers": [],
+      "note": "Feeling steady today. Grateful for the small wins.",
+      "createdAt": "2026-06-15T02:30:00.000Z"
+    }
+  ],
+  "journalEntries": [
+    {
+      "id": "jseed3",
+      "date": "2026-06-13",
+      "prompt": "What helped me stay grounded today?",
+      "response": "Took a long walk after work instead of scrolling my phone. Called my sponsor and just talked through my day. It's the little routines that keep adding up.",
+      "createdAt": "2026-06-14T04:00:00.000Z"
+    },
+    {
+      "id": "jseed2",
+      "date": "2026-06-09",
+      "prompt": "What am I most grateful for today in my recovery?",
+      "response": "Grateful that I noticed the urge before it took over. A few weeks ago I wouldn't have even paused. Progress isn't always loud, but it's there.",
+      "createdAt": "2026-06-10T03:15:00.000Z"
+    },
+    {
+      "id": "jseed1",
+      "date": "2026-06-02",
+      "prompt": "What was the hardest moment today, and how did I handle it?",
+      "response": "Ran into an old friend who still uses. Felt the pull for a second, but I just kept walking and texted a friend right after. Felt proud of that.",
+      "createdAt": "2026-06-03T01:45:00.000Z"
+    }
+  ]
+}
